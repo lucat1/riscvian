@@ -16,10 +16,10 @@ jobs:
         run: apt update
       - name: Build kernels
         run: bash make
-      - name: Store pirvate.pgp
-        run: echo ${{ secrets.PrivateKey }} > private.pgp
       - name: Generate debian repository
-        run: bash repository
+        run: |
+          echo $PRIVATE_KEY > private.pgp
+          bash repository
       - name: Remove conf
         run: rm -rf repo/conf
       - name: Setup Pages
