@@ -7,7 +7,7 @@ fi
 # dependencies needed by the script or the base
 # debian kernel package for the build step
 apt install -y curl make rsync kmod cpio libncurses-dev \
-  libssl-dev bc flex bison make gcc 
+  libssl-dev bc flex bison make gcc build-essential dpkg-dev
 
 base=$PWD
 for device in $(cat kernels); do
