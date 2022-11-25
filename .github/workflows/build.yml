@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    name: Build debian packages
+    runs-on: ubuntu-latest
+    container:
+      image: debian
+      env:
+        - PRIVATE_KEY: ${{ secrets.PrivateKey }}
+    steps:
+      - name: Build kernels
+        run: bash build
+      - name: Generate debian repository
+        run: bash repository
+      - name: Remove conf
+        run: rm -rf repo/conf
+      - name: Setup Pages
+        uses: actions/configure-pages@v1
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: repo
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@main
