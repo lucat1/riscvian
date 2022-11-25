@@ -11,8 +11,9 @@ jobs:
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
     steps:
+      - uses: actions/checkout@v3
       - name: Build kernels
-        run: bash build
+        run: bash make
       - name: Store pirvate.pgp
         run: echo ${{ secrets.PrivateKey }} > private.pgp
       - name: Generate debian repository
