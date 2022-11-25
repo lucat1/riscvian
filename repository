@@ -1,0 +1,31 @@
+#!/bin/bash -e
+
+if [ ! -z "$DEBUG" ]; then
+  set -x
+fi
+
+if [ ! -f "private.pgp" ] || [ ! -f "public.pgp" ]; then
+  echo "Missing `private.pgp` or `public.pgp`"
+  exit 1
+fi
+
+gpg --import private.pgp
+keyid=$(gpg --list-keys --with-colons  | awk -F: '/^pub:/ { print $5 }')
+
+echo "Using gpg key: $keyid"
+sed -i "s/signkey/$keyid/g" repo/conf/distributions
+gpg --export --armor $keyid > repo/signkey.pgp
+
+echo "Installing dependencies"
+apt install -y reprepro
+
+base=$PWD
+cd repo
+for device in $(cat $base/kernels); do
+  for change in $base/build/$device/*.changes; do
+    echo "Including change at $change"
+    reprepro --ignore=wrongdistribution include unstable $change
+  done
+done
+
+cd $base

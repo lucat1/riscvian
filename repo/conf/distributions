@@ -1,0 +1,15 @@
+Origin: RISCVbian
+Label: Debian on RISCV SBCs (Single Board Computers) unstable
+Codename: unstable
+Architectures: riscv32 riscv64
+Components: main
+Description: A collection of kernels purposely built for various RISC-V SBCs
+SignWith: signkey
+
+Origin: RISCVbian
+Label: Debian on RISCV SBCs (Single Board Computers) stable
+Codename: stable
+Architectures: riscv32 riscv64
+Components: main
+Description: A collection of kernels purposely built for various RISC-V SBCs
+SignWith: signkey

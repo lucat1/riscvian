@@ -1,1 +1,7 @@
 build/*
+repo/db
+repo/dists
+repo/pool
+repo/conf/distributions
+repo/signkey.pgp
+private.pgp
