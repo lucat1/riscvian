@@ -12,6 +12,8 @@ jobs:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v3
+      - name: Prepare package system
+        run: apt update
       - name: Build kernels
         run: bash make
       - name: Store pirvate.pgp
