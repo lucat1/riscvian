@@ -1,0 +1,4 @@
+PKGDEP="libncurses-dev libssl-dev bc flex bison make gcc gcc-riscv64-linux-gnu"
+ARCH=riscv
+CROSS_COMPILE=riscv64-linux-gnu-
+LOCALVERSION=-starfive-v1
