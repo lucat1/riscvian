@@ -1,7 +1,8 @@
-name: CI
+name: Build & Deploy
 on:
   push:
     branches: [main]
+
 jobs:
   build:
     name: Build debian packages
@@ -18,7 +19,7 @@ jobs:
         run: bash make
       - name: Generate debian repository
         run: |
-          echo $PRIVATE_KEY > private.pgp
+          echo "$PRIVATE_KEY" > private.pgp
           bash repository
       - name: Remove conf
         run: rm -rf repo/conf
